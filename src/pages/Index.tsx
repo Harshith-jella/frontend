@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { LinkedIn, Github, Instagram, Facebook, Mail } from 'lucide-react';
+import { Linkedin, Github, Instagram, Facebook, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
 
@@ -37,7 +36,7 @@ const Index = () => {
             {/* Social Links */}
             <div className="flex space-x-6">
               <a href="#" className="rounded-full p-3 bg-[#00ffd5]/10 hover:bg-[#00ffd5]/20 transition-colors">
-                <LinkedIn className="w-6 h-6 text-[#00ffd5]" />
+                <Linkedin className="w-6 h-6 text-[#00ffd5]" />
               </a>
               <a href="#" className="rounded-full p-3 bg-[#00ffd5]/10 hover:bg-[#00ffd5]/20 transition-colors">
                 <Github className="w-6 h-6 text-[#00ffd5]" />
