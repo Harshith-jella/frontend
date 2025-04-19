@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -21,7 +20,6 @@ import {
   Info,
 } from 'lucide-react';
 
-// Mock data for demonstration
 const mockResults = {
   documentName: "Rental_Agreement_2025.pdf",
   trustScore: 87,
@@ -53,9 +51,7 @@ const Results = () => {
   const toggleVoice = () => {
     setVoiceEnabled(!voiceEnabled);
     if (!voiceEnabled) {
-      // This would be where the actual text-to-speech implementation would go
-      toast({
-        title: "Voice Reading Enabled",
+      toast("Voice Reading Enabled", {
         description: "In a production environment, this would read the content aloud."
       });
     }
