@@ -1,64 +1,93 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Linkedin, Github, Instagram, Facebook, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { AnimatedBackground } from '@/components/AnimatedBackground';
+import { FileUploader } from '@/components/FileUploader';
+import { CategorySelector } from '@/components/CategorySelector';
 
 const Index = () => {
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  
+  const categories = [
+    "Automobile",
+    "Housing",
+    "IT",
+    "Industrial",
+    "Healthcare",
+    "Finance",
+    "Other"
+  ];
+
   return (
-    <>
-      <AnimatedBackground />
-      <div className="min-h-screen">
-        {/* Navigation */}
-        <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-white/10">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex justify-between items-center">
-              <h1 className="text-2xl font-semibold">
-                Charan Reddy <span className="text-[#00ffd5]">Doolam</span>
-              </h1>
-              <div className="space-x-8">
-                <Link to="/" className="text-[#00ffd5] hover:text-[#00ffd5]/80">Home</Link>
-                <Link to="/about" className="text-white/90 hover:text-[#00ffd5]">About</Link>
-                <Link to="/projects" className="text-white/90 hover:text-[#00ffd5]">Projects</Link>
-                <Link to="/contact" className="text-white/90 hover:text-[#00ffd5]">Contact</Link>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-4xl mx-auto space-y-8">
+        {/* Header */}
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl font-bold text-primary">
+            👋 Welcome to the AI Consent Simplifier!
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            We help you understand complex agreements before you sign. Let's get started:
+          </p>
+        </div>
+
+        {/* Main Content */}
+        <div className="space-y-8">
+          {/* Step 1: Category Selection */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">
+              1️⃣ Select the category of your agreement:
+            </h2>
+            <CategorySelector
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
+          </div>
+
+          {/* Step 2: File Upload */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">
+              2️⃣ Upload the agreement file (PDF only)
+            </h2>
+            <FileUploader
+              onFileUpload={setUploadedFiles}
+              uploadedFiles={uploadedFiles}
+            />
+          </div>
+
+          {/* Step 3: AI Features */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">
+              3️⃣ Our AI will:
+            </h2>
+            <div className="grid gap-4 text-lg">
+              <div className="flex items-center gap-2">
+                <span>✔️</span>
+                <span>Break it down into plain English</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>⚠️</span>
+                <span>Highlight important risks</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>📌</span>
+                <span>Clarify your responsibilities</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>✅</span>
+                <span>Identify your rights</span>
               </div>
             </div>
           </div>
-        </nav>
+        </div>
 
-        {/* Hero Section */}
-        <main className="container mx-auto px-4 pt-32">
-          <div className="flex flex-col items-center text-center space-y-8">
-            <p className="max-w-3xl text-lg text-white/80">
-              Hi! I'm a software developer with diverse experience in drive impact via technical solutions. I am actively seeking internship opportunities to apply my skills in UI/UX design, web development, data analysis, and project management, while continuing to grow as a professional in the tech industry. Let's connect and explore ways to innovate together!
-            </p>
-
-            {/* Social Links */}
-            <div className="flex space-x-6">
-              <a href="#" className="rounded-full p-3 bg-[#00ffd5]/10 hover:bg-[#00ffd5]/20 transition-colors">
-                <Linkedin className="w-6 h-6 text-[#00ffd5]" />
-              </a>
-              <a href="#" className="rounded-full p-3 bg-[#00ffd5]/10 hover:bg-[#00ffd5]/20 transition-colors">
-                <Github className="w-6 h-6 text-[#00ffd5]" />
-              </a>
-              <a href="#" className="rounded-full p-3 bg-[#00ffd5]/10 hover:bg-[#00ffd5]/20 transition-colors">
-                <Instagram className="w-6 h-6 text-[#00ffd5]" />
-              </a>
-              <a href="#" className="rounded-full p-3 bg-[#00ffd5]/10 hover:bg-[#00ffd5]/20 transition-colors">
-                <Facebook className="w-6 h-6 text-[#00ffd5]" />
-              </a>
-              <a href="#" className="rounded-full p-3 bg-[#00ffd5]/10 hover:bg-[#00ffd5]/20 transition-colors">
-                <Mail className="w-6 h-6 text-[#00ffd5]" />
-              </a>
-            </div>
-
-            <Button className="bg-[#00ffd5] text-black hover:bg-[#00ffd5]/90 px-8 py-6 text-lg rounded-full">
-              Hire Me
-            </Button>
-          </div>
-        </main>
+        {/* Footer */}
+        <div className="text-center text-lg font-medium text-primary">
+          🔍 Everything you need to know before signing — simplified.
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
