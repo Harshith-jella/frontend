@@ -1,6 +1,5 @@
-
 import React, { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { FileUploader } from '@/components/FileUploader';
 import { CategorySelector } from '@/components/CategorySelector';
@@ -12,8 +11,10 @@ const Index = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const categories = [
     "Automobile",
@@ -26,7 +27,6 @@ const Index = () => {
     "Other"
   ];
 
-  // Handle mouse movement for interactive effects
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
@@ -62,10 +62,17 @@ const Index = () => {
       return;
     }
 
+    setIsLoading(true);
+    
     toast({
       title: "Analysis Started",
       description: "We're analyzing your agreement. This might take a moment."
     });
+    
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate('/results');
+    }, 2000);
   };
 
   return (
@@ -73,7 +80,6 @@ const Index = () => {
       <AnimatedBackground />
       <div className="min-h-screen bg-background/5 backdrop-blur-sm p-6">
         <div className="max-w-4xl mx-auto space-y-16 pt-12">
-          {/* Header */}
           <div 
             ref={heroRef}
             className="text-center space-y-6"
@@ -104,9 +110,7 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Main Content */}
           <div className="space-y-16 backdrop-blur-sm bg-black/20 p-8 rounded-3xl border border-white/10">
-            {/* Step 1: Category Selection */}
             <div className="space-y-4">
               <h2 className="text-2xl font-medium flex items-center gap-3">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00ffd5]/10 text-[#00ffd5]">1</span>
@@ -119,7 +123,6 @@ const Index = () => {
               />
             </div>
 
-            {/* Step 2: File Upload */}
             <div className="space-y-4">
               <h2 className="text-2xl font-medium flex items-center gap-3">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00ffd5]/10 text-[#00ffd5]">2</span>
@@ -131,7 +134,6 @@ const Index = () => {
               />
             </div>
 
-            {/* Step 3: AI Features */}
             <div className="space-y-6">
               <h2 className="text-2xl font-medium flex items-center gap-3">
                 <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00ffd5]/10 text-[#00ffd5]">3</span>
@@ -189,15 +191,14 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Continue Button */}
               <div className="pt-8 flex justify-end">
                 <Button 
                   onClick={handleContinue}
                   className="w-44 h-14 text-lg bg-gradient-to-r from-[#00ffd5] to-[#0066ff] hover:opacity-90 transition-opacity relative overflow-hidden group"
-                  disabled={!selectedCategory || uploadedFiles.length === 0}
+                  disabled={!selectedCategory || uploadedFiles.length === 0 || isLoading}
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    Analyze Now
+                    {isLoading ? "Analyzing..." : "Analyze Now"}
                     <Zap size={18} className="animate-pulse" />
                   </span>
                   <span className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
@@ -205,8 +206,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-          
-          {/* Footer */}
+
           <div className="text-center text-gray-400 text-sm mt-12">
             <p>Powered by CrewAI, Masumi API, and OpenAI</p>
             <p className="mt-2">© 2025 ConsentIQ. All rights reserved.</p>
