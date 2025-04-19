@@ -2,7 +2,13 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+}
+
+.glass-card {
+  @apply backdrop-blur-xl bg-white/5 border border-white/10;
+  box-shadow: 
+    0 4px 12px -2px rgba(0, 0, 0, 0.3),
+    0 0 20px -4px rgba(155, 135, 245, 0.1);
 }
 
 .logo {

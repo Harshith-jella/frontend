@@ -30,13 +30,16 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
   };
 
   return (
-    <div>
+    <div className="space-y-4">
       <div 
         {...getRootProps()} 
-        className={`
-          p-8 border-2 border-dashed rounded-lg text-center cursor-pointer
-          ${isDragActive ? 'border-primary bg-primary/10' : 'border-border'}
-        `}
+        className={cn(
+          'p-8 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors duration-200',
+          'hover:border-primary/50 hover:bg-primary/5',
+          isDragActive 
+            ? 'border-primary bg-primary/10' 
+            : 'border-border'
+        )}
       >
         <input {...getInputProps()} />
         <p className="text-muted-foreground">
@@ -47,19 +50,19 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
       </div>
 
       {uploadedFiles.length > 0 && (
-        <div className="mt-4 space-y-2">
+        <div className="space-y-2">
           {uploadedFiles.map((file) => (
             <div 
               key={file.name} 
-              className="flex items-center justify-between bg-secondary p-2 rounded"
+              className="flex items-center justify-between bg-secondary/50 p-3 rounded-lg border border-border"
             >
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3">
                 <FileText className="text-primary" />
-                <span>{file.name}</span>
+                <span className="text-sm">{file.name}</span>
               </div>
               <button 
                 onClick={() => removeFile(file)}
-                className="text-destructive hover:bg-destructive/10 p-1 rounded"
+                className="text-destructive hover:bg-destructive/10 p-2 rounded-full transition-colors"
               >
                 <Trash2 size={16} />
               </button>
