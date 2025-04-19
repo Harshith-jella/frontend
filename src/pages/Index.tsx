@@ -94,6 +94,13 @@ const Index = () => {
               We help you understand complex legal and medical documents
               before you sign. Get clear, immediate understanding in seconds.
             </p>
+            <div className="pt-4">
+              <Link to="/features">
+                <Button variant="outline" className="bg-black/30 border-[#00ffd5]/30 text-[#00ffd5] hover:bg-[#00ffd5]/10">
+                  View Features
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {/* Main Content */}
