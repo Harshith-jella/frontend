@@ -20,11 +20,12 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({
           key={category}
           onClick={() => onSelectCategory(category)}
           className={cn(
-            "px-4 py-3 rounded-lg border transition-all duration-200",
-            "hover:scale-105 active:scale-100",
+            "px-6 py-4 rounded-2xl transition-all duration-200",
+            "backdrop-blur-sm border border-white/10",
+            "hover:border-[#00ffd5]/50",
             selectedCategory === category
-              ? "bg-primary/20 border-primary text-primary"
-              : "border-border bg-secondary/50 text-muted-foreground hover:text-foreground hover:border-primary/50"
+              ? "bg-[#00ffd5]/10 border-[#00ffd5] text-[#00ffd5]"
+              : "bg-black/20 text-gray-300"
           )}
         >
           {category}

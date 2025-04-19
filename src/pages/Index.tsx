@@ -4,9 +4,7 @@ import { Button } from '@/components/ui/button';
 import { FileUploader } from '@/components/FileUploader';
 import { CategorySelector } from '@/components/CategorySelector';
 import { AnimatedBackground } from '@/components/AnimatedBackground';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import { Info } from 'lucide-react';
 
 const Index = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
@@ -17,13 +15,12 @@ const Index = () => {
     "Automobile",
     "Housing",
     "IT",
-    "Industrial",
     "Healthcare",
     "Finance",
     "Other"
   ];
 
-  const handleAnalyze = () => {
+  const handleContinue = () => {
     if (!selectedCategory) {
       toast({
         variant: "destructive",
@@ -51,24 +48,25 @@ const Index = () => {
   return (
     <>
       <AnimatedBackground />
-      <div className="min-h-screen bg-background/50 backdrop-blur-sm p-6">
-        <div className="max-w-4xl mx-auto space-y-8">
+      <div className="min-h-screen bg-background/5 backdrop-blur-sm p-6">
+        <div className="max-w-3xl mx-auto space-y-12 pt-12">
           {/* Header */}
           <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              👋 Welcome to the AI Consent Simplifier!
+            <h1 className="text-5xl font-medium bg-gradient-to-r from-[#00ffd5] to-[#00ffd5]/80 bg-clip-text text-transparent">
+              Welcome to the<br />AI Consent Simplifier!
             </h1>
-            <p className="text-lg text-muted-foreground">
-              We help you understand complex agreements before you sign. Let's get started:
+            <p className="text-xl text-gray-300">
+              We help you understand complex agreements<br />before you sign. Let's get started:
             </p>
           </div>
 
           {/* Main Content */}
-          <div className="space-y-8">
+          <div className="space-y-12">
             {/* Step 1: Category Selection */}
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold flex items-center gap-2">
-                <span className="text-primary">1️⃣</span> Select the category of your agreement:
+              <h2 className="text-2xl font-medium flex items-center gap-3">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00ffd5]/10 text-[#00ffd5]">1</span>
+                Select the category of your agreement:
               </h2>
               <CategorySelector
                 categories={categories}
@@ -79,8 +77,9 @@ const Index = () => {
 
             {/* Step 2: File Upload */}
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold flex items-center gap-2">
-                <span className="text-primary">2️⃣</span> Upload the agreement file (PDF only)
+              <h2 className="text-2xl font-medium flex items-center gap-3">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00ffd5]/10 text-[#00ffd5]">2</span>
+                Upload the agreement file (PDF only)
               </h2>
               <FileUploader
                 onFileUpload={setUploadedFiles}
@@ -90,54 +89,28 @@ const Index = () => {
 
             {/* Step 3: AI Features */}
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold flex items-center gap-2">
-                <span className="text-primary">3️⃣</span> Our AI will:
+              <h2 className="text-2xl font-medium flex items-center gap-3">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00ffd5]/10 text-[#00ffd5]">3</span>
+                Our AI will:
               </h2>
-              <div className="grid gap-4 text-lg">
-                <div className="flex items-center gap-2">
-                  <span>✔️</span>
-                  <span>Break it down into plain English</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>⚠️</span>
-                  <span>Highlight important risks</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>📌</span>
-                  <span>Clarify your responsibilities</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>✅</span>
-                  <span>Identify your rights</span>
-                </div>
+              <div className="grid gap-4 text-lg text-gray-300 pl-11">
+                <div>• Break it down into plain English</div>
+                <div>• Highlight important risks</div>
+                <div>• Clarify your responsibilities</div>
+                <div>• Identify your rights</div>
               </div>
 
-              {/* User Guidance Alert */}
-              <Alert className="bg-secondary/50 border-primary/20">
-                <Info className="h-5 w-5 text-primary" />
-                <AlertDescription className="text-muted-foreground">
-                  For best results, ensure your PDF is text-searchable and not a scanned image.
-                </AlertDescription>
-              </Alert>
-
-              {/* Analyze Button */}
-              <div className="pt-4">
+              {/* Continue Button */}
+              <div className="pt-8 flex justify-end">
                 <Button 
-                  onClick={handleAnalyze}
-                  className="w-full py-6 text-lg"
+                  onClick={handleContinue}
+                  className="w-40 h-14 text-lg bg-gradient-to-r from-[#00ffd5] to-[#0066ff] hover:opacity-90 transition-opacity"
                   disabled={!selectedCategory || uploadedFiles.length === 0}
                 >
-                  🔍 Analyze Agreement
+                  Continue
                 </Button>
               </div>
             </div>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-lg font-medium text-gradient bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              Everything you need to know before signing — simplified.
-            </p>
           </div>
         </div>
       </div>
